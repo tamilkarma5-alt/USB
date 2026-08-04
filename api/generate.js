@@ -5,12 +5,11 @@ export default function handler(req, res) {
     return res.status(400).json({ error: 'Port number is required' });
   }
 
-  // Bin file content
-  const binContent = `Port Number: ${port}\nGenerated on: ${new Date().toISOString()}`;
+  // BAT file content
+  const batContent = `@echo off\necho Port Number is ${port}\npause`;
 
-  res.setHeader('Content-Type', 'application/octet-stream');
-  res.setHeader('Content-Disposition', 'attachment; filename="config.bin"');
+  res.setHeader('Content-Type', 'application/x-msdos-program');
+  res.setHeader('Content-Disposition', 'attachment; filename="config.bat"');
   
-  res.status(200).send(binContent);
+  res.status(200).send(batContent);
 }
-
